@@ -11,20 +11,20 @@ const POKEMONS = [
 ];
 
 function App() {
-  const [currentPokemon, setCurrentPokemon] = useState(0); // Index of Pokémon
+  const [currentPokemon, setCurrentPokemon] = useState(0);
   const [correctGuess, setCorrectGuess] = useState(false);
   const [incorrectGuesses, setIncorrectGuesses] = useState(0);
   const [input, setInput] = useState('');
   const [gameOver, setGameOver] = useState(false);
 
   const handleGuessSubmit = () => {
-    if (!input.trim()) return; // Prevent empty submission
+    if (!input.trim()) return;
 
     const guess = input.trim().toLowerCase();
     const pokemonName = POKEMONS[currentPokemon].toLowerCase();
 
     if (guess === pokemonName) {
-      setCorrectGuess(true); // Correct guess
+      setCorrectGuess(true);
     } else {
       setIncorrectGuesses((prev) => {
         const newGuesses = prev + 1;
@@ -32,7 +32,7 @@ function App() {
         return newGuesses;
       });
     }
-    setInput(''); // Clear input field
+    setInput('');
   };
 
   const handleNextPokemon = () => {
@@ -40,7 +40,7 @@ function App() {
       setCurrentPokemon((prev) => prev + 1);
       setCorrectGuess(false);
     } else {
-      setGameOver(true); // End of game
+      setGameOver(true);
     }
   };
 
@@ -55,9 +55,11 @@ function App() {
     <div className="App">
       <PokemonDisplay 
         pokemonIndex={currentPokemon} 
-        revealed={correctGuess} 
+        revealed={correctGuess}
       />
-      <GuessCounter incorrectGuesses={incorrectGuesses} />
+      <GuessCounter 
+        incorrectGuesses={incorrectGuesses} 
+      />
       <GuessInput 
         input={input} 
         onInputChange={setInput} 
